@@ -1,0 +1,2420 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script data-goatcounter="https://cs-akcios-11.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<meta name="color-scheme" content="only light">
+<title>Novemberi Alkatrészakció — Chemical-Seed</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-dark: #0a0a0a;
+    --bg-dark-2: #161616;
+    --bg-light: #f5f3ee;
+    --bg-light-2: #ffffff;
+    --accent-yellow: #f5b800;
+    --accent-orange: #e85d1f;
+    --accent-orange-dark: #c44a13;
+    --text-dark: #0a0a0a;
+    --text-light: #ffffff;
+    --text-muted-dark: #6b6b6b;
+    --text-muted-light: #999;
+    --border-dark: #2a2a2a;
+    --border-light: #e5e1d8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-light);
+    line-height: 1.5;
+    overflow-x: hidden;
+  }
+
+  /* ========== NAV ========== */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 18px 5vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-dark);
+  }
+  .nav-logo {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+    color: var(--text-light);
+  }
+  .nav-logo span { color: var(--accent-yellow); }
+  .nav-cta {
+    background: var(--accent-orange);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
+  }
+  .nav-cta:hover { background: var(--accent-orange-dark); transform: translateY(-1px); }
+
+  /* ========== HERO ========== */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    padding: 120px 5vw 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--bg-dark);
+  }
+  /* Hero background image */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('hero-jcb.jpg');
+    background-size: cover;
+    background-position: center right;
+    z-index: 0;
+  }
+  /* Dark overlay gradient — stronger on left where text sits */
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(100deg,
+        rgba(8, 8, 8, 0.96) 0%,
+        rgba(8, 8, 8, 0.88) 35%,
+        rgba(8, 8, 8, 0.62) 65%,
+        rgba(8, 8, 8, 0.55) 100%),
+      radial-gradient(ellipse at 70% 40%, rgba(245, 184, 0, 0.1) 0%, transparent 55%);
+  }
+  /* Grid texture overlay */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+  /* Diagonal accent line */
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 8%;
+    width: 1px;
+    height: 100%;
+    z-index: 1;
+    background: linear-gradient(180deg, transparent, var(--accent-yellow) 30%, var(--accent-yellow) 70%, transparent);
+    opacity: 0.4;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: rgba(245, 184, 0, 0.12);
+    border: 1px solid rgba(245, 184, 0, 0.35);
+    color: var(--accent-yellow);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 100px;
+    margin-bottom: 32px;
+    width: fit-content;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent-yellow);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .hero h1 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(40px, 6.5vw, 88px);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+    color: var(--text-light);
+  }
+  .hero h1 .accent {
+    color: var(--text-light);
+    position: relative;
+    display: inline-block;
+  }
+  .hero h1 .strike {
+    color: var(--accent-yellow);
+    font-style: italic;
+    position: relative;
+  }
+  .hero-sub {
+    font-size: clamp(16px, 1.4vw, 19px);
+    color: #c5c5c5;
+    margin-bottom: 40px;
+    max-width: 540px;
+    line-height: 1.6;
+  }
+  .hero-sub strong { color: var(--text-light); font-weight: 600; }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+  .btn-primary, .btn-secondary {
+    padding: 18px 32px;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+  }
+  .btn-primary {
+    background: linear-gradient(90deg, var(--accent-orange), var(--accent-yellow));
+    color: #1a1a1a;
+    box-shadow: 0 4px 0 var(--accent-orange-dark);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 var(--accent-orange-dark);
+  }
+  .btn-primary:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 var(--accent-orange-dark);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--text-light);
+    border: 1.5px solid #444;
+  }
+  .btn-secondary:hover {
+    border-color: var(--accent-yellow);
+    color: var(--accent-yellow);
+  }
+  .btn-arrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+  }
+
+  .hero-microcopy {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: #999;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .hero-microcopy span::before {
+    content: '✓ ';
+    color: var(--accent-yellow);
+    margin-right: 4px;
+  }
+
+  /* Countdown */
+  .countdown-box {
+    background: rgba(14, 14, 14, 0.72);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  }
+  .countdown-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-orange), var(--accent-yellow));
+  }
+  .countdown-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-yellow);
+    margin-bottom: 8px;
+  }
+  .countdown-title {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: var(--text-light);
+  }
+  .countdown-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  .countdown-unit {
+    text-align: center;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--border-dark);
+    border-radius: 4px;
+    padding: 14px 6px;
+  }
+  .countdown-num {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(24px, 3vw, 36px);
+    color: var(--accent-yellow);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .countdown-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted-light);
+    margin-top: 8px;
+  }
+  .countdown-footer {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-dark);
+    font-size: 12px;
+    color: var(--text-muted-light);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* ========== TRUST BAR ========== */
+  .trust-bar {
+    background: var(--bg-dark-2);
+    border-top: 1px solid var(--border-dark);
+    border-bottom: 1px solid var(--border-dark);
+    padding: 32px 5vw;
+  }
+  .trust-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .trust-brands {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    align-items: center;
+  }
+  .brand-pill {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 14px;
+    color: #888;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .brand-pill:hover { color: var(--accent-yellow); }
+  .trust-divider {
+    width: 1px;
+    height: 60px;
+    background: var(--border-dark);
+  }
+  .trust-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .trust-stat {
+    text-align: left;
+  }
+  .trust-stat-num {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 22px;
+    color: var(--accent-yellow);
+    line-height: 1;
+  }
+  .trust-stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted-light);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  /* ========== PROBLEM SECTION ========== */
+  .problem {
+    background: var(--bg-light);
+    color: var(--text-dark);
+    padding: 80px 5vw;
+    position: relative;
+    overflow: hidden;
+  }
+  .problem::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(0,0,0,0.06) 1px, transparent 0);
+    background-size: 24px 24px;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .problem-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .section-eyebrow {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-yellow);
+    margin-bottom: 20px;
+    padding: 6px 14px;
+    border: 1px solid rgba(245, 184, 0, 0.35);
+    border-radius: 100px;
+  }
+  .problem h2 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(28px, 4vw, 48px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+  .problem p {
+    font-size: clamp(15px, 1.3vw, 18px);
+    color: #444;
+    max-width: 680px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* ========== PRODUCTS ========== */
+  .products {
+    background: var(--bg-light-2);
+    color: var(--text-dark);
+    padding: 80px 5vw 100px;
+    position: relative;
+  }
+  .products-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .products-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 2px solid var(--text-dark);
+  }
+  .products-title-block h2 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(32px, 4.5vw, 56px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .products-title-block .count {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-muted-dark);
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .products-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-muted-dark);
+    text-align: right;
+  }
+  .products-meta .live {
+    color: var(--accent-yellow);
+    font-weight: 700;
+  }
+  .products-meta .live::before {
+    content: '●';
+    margin-right: 6px;
+    animation: pulse 2s infinite;
+  }
+
+  /* Filter pills */
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 40px;
+  }
+  .filter-pill {
+    padding: 10px 18px;
+    background: transparent;
+    border: 1.5px solid var(--border-light);
+    border-radius: 100px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .filter-pill:hover { border-color: var(--text-dark); color: var(--text-dark); }
+  .filter-pill.active {
+    background: var(--text-dark);
+    color: var(--text-light);
+    border-color: var(--text-dark);
+  }
+  .filter-pill .count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    opacity: 0.7;
+    margin-left: 4px;
+  }
+
+  /* Product grid */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .product-card {
+    background: #fafaf7;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+    border-color: var(--text-dark);
+  }
+  .product-image {
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, #fff, #ececec);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .product-image img.product-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }
+  /* Ha a kép nem tölt be (onerror), elrejtjük és marad a placeholder SVG */
+  .product-image img.product-photo.img-failed {
+    display: none;
+  }
+  .product-image-placeholder {
+    font-family: 'JetBrains Mono', monospace;
+    color: #bbb;
+    font-size: 11px;
+    text-align: center;
+    line-height: 1.6;
+  }
+  .product-image-placeholder svg {
+    display: block;
+    margin: 0 auto 8px;
+    opacity: 0.4;
+  }
+  .product-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 2;
+    background: var(--accent-orange);
+    color: #fff;
+    padding: 4px 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    border-radius: 3px;
+  }
+  .product-stock {
+    display: none;
+  }
+  .product-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  .product-category {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #b88800;
+    margin-bottom: 8px;
+  }
+  .product-name {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.3;
+    margin-bottom: 6px;
+    color: var(--text-dark);
+  }
+  .product-sku {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted-dark);
+    margin-bottom: 16px;
+  }
+  .product-price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 4px;
+    margin-top: auto;
+  }
+  .product-price-original {
+    font-size: 13px;
+    color: var(--text-muted-dark);
+    text-decoration: line-through;
+  }
+  .product-price-discount {
+    background: var(--accent-orange);
+    color: #fff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+  .product-price-current {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 24px;
+    color: var(--text-dark);
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .product-price-vat {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--text-muted-dark);
+    letter-spacing: 0.02em;
+  }
+  .product-actions {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+  }
+  .btn-card-primary {
+    background: var(--text-dark);
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+  }
+  .btn-card-primary:hover { background: var(--accent-orange); }
+  .btn-card-icon {
+    background: transparent;
+    border: 1.5px solid var(--border-light);
+    border-radius: 4px;
+    width: 42px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .btn-card-icon:hover { border-color: var(--text-dark); }
+
+  /* ========== MACHINES (JOSKIN gépajánlat) ========== */
+  .machines {
+    background: var(--bg-dark);
+    color: var(--text-light);
+    padding: 90px 5vw;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid var(--border-dark);
+  }
+  .machines::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image:
+      radial-gradient(ellipse at 15% 0%, rgba(245,184,0,0.07) 0%, transparent 55%),
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: auto, 60px 60px, 60px 60px;
+    pointer-events: none;
+  }
+  .machines-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .machines-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+  .machines-title-block { max-width: 640px; }
+  .machines h2 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(30px, 4.5vw, 54px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin: 14px 0 16px;
+  }
+  .machines h2 em { color: var(--accent-yellow); font-style: italic; }
+  .machines-sub {
+    font-size: clamp(15px, 1.3vw, 17px);
+    color: #b5b5b5;
+    line-height: 1.6;
+  }
+  .machines-sub strong { color: #fff; font-weight: 600; }
+  .machines-phone { flex-shrink: 0; text-align: right; }
+  .machines-phone-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted-light);
+    margin-bottom: 6px;
+  }
+  .machines-phone a {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(20px, 2.4vw, 28px);
+    color: var(--accent-yellow);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .machines-phone a:hover { color: #ffd24d; }
+
+  .machine-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .machine-card {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    background: linear-gradient(135deg, var(--bg-dark-2), #101010);
+    border: 1px solid var(--border-dark);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  }
+  .machine-card:hover {
+    border-color: var(--accent-yellow);
+    transform: translateY(-3px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+  }
+  /* Váltakozó elrendezés: páros kártyáknál a kép a jobb oldalon */
+  .machine-card:nth-child(even) .machine-media { order: 2; }
+
+  .machine-media {
+    position: relative;
+    min-height: 280px;
+    background:
+      radial-gradient(ellipse at center, rgba(245,184,0,0.12) 0%, transparent 62%),
+      #0d0d0d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-right: 1px solid var(--border-dark);
+  }
+  .machine-card:nth-child(even) .machine-media {
+    border-right: none;
+    border-left: 1px solid var(--border-dark);
+  }
+  .machine-media img.machine-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }
+  /* Ha a kép nem tölt be, marad a placeholder rajz */
+  .machine-media img.machine-photo.img-failed { display: none; }
+  .machine-placeholder {
+    color: #3a3a3a;
+    width: 72%;
+    max-width: 340px;
+  }
+  .machine-badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 2;
+    background: var(--accent-orange);
+    color: #fff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 3px;
+  }
+
+  .machine-body {
+    padding: 38px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .machine-brand {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    color: var(--accent-yellow);
+    margin-bottom: 10px;
+  }
+  .machine-name {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(22px, 2.4vw, 30px);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 14px;
+    color: var(--text-light);
+  }
+  .machine-spec {
+    font-size: 14px;
+    color: #aaa;
+    line-height: 1.6;
+    margin-bottom: 26px;
+  }
+  .machine-price-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted-light);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .machine-price {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(28px, 3.2vw, 40px);
+    color: var(--text-light);
+    line-height: 1;
+    margin-bottom: 28px;
+  }
+  .machine-price span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-muted-light);
+    letter-spacing: 0.02em;
+  }
+  .machine-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .machine-btn {
+    background: linear-gradient(90deg, var(--accent-orange), var(--accent-yellow));
+    color: #1a1a1a;
+    border: none;
+    padding: 14px 26px;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 4px 0 var(--accent-orange-dark);
+    transition: all 0.2s;
+  }
+  .machine-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 0 var(--accent-orange-dark); }
+  .machine-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--accent-orange-dark); }
+  .machine-call {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: #ccc;
+    text-decoration: none;
+    border: 1px solid var(--border-dark);
+    padding: 13px 18px;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+  .machine-call:hover { border-color: var(--accent-yellow); color: var(--accent-yellow); }
+
+  /* ========== WHY US ========== */
+  .why {
+    background: var(--bg-dark);
+    color: var(--text-light);
+    padding: 100px 5vw;
+    position: relative;
+    overflow: hidden;
+  }
+  .why::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -10%;
+    width: 50%; height: 200%;
+    background: radial-gradient(ellipse, rgba(245, 184, 0, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .why-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .why-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  .why h2 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(32px, 4.5vw, 56px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+  .why h2 em {
+    color: var(--accent-yellow);
+    font-style: italic;
+  }
+  .why-sub {
+    font-size: 17px;
+    color: #aaa;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .why-card {
+    background: var(--bg-dark-2);
+    border: 1px solid var(--border-dark);
+    padding: 36px 28px;
+    border-radius: 8px;
+    position: relative;
+    transition: all 0.3s;
+  }
+  .why-card:hover {
+    border-color: var(--accent-yellow);
+    transform: translateY(-4px);
+  }
+  .why-card-num {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 56px;
+    color: var(--accent-yellow);
+    line-height: 1;
+    margin-bottom: 20px;
+    letter-spacing: -0.04em;
+  }
+  .why-card-num sup {
+    font-size: 20px;
+    font-weight: 400;
+    margin-left: 2px;
+    color: #888;
+    vertical-align: top;
+  }
+  .why-card h3 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 20px;
+    line-height: 1.2;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+  .why-card p {
+    font-size: 14px;
+    color: #aaa;
+    line-height: 1.6;
+  }
+
+  /* ========== LOCATIONS ========== */
+  .locations {
+    background: var(--bg-dark-2);
+    color: var(--text-light);
+    padding: 80px 5vw;
+    border-top: 1px solid var(--border-dark);
+  }
+  .locations-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .locations-header {
+    margin-bottom: 40px;
+  }
+  .locations h2 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(28px, 3.5vw, 42px);
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .locations-sub {
+    color: #888;
+    font-size: 14px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .locations-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .location-card {
+    padding: 20px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border-dark);
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+  .location-card.central {
+    background: linear-gradient(135deg, rgba(245, 184, 0, 0.08), transparent);
+    border-color: rgba(245, 184, 0, 0.3);
+  }
+  .location-card:hover {
+    border-color: var(--accent-yellow);
+    background: rgba(245, 184, 0, 0.05);
+  }
+  .location-name {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .location-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--accent-yellow);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+  .location-phone {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: #ccc;
+    display: block;
+    margin-bottom: 4px;
+    text-decoration: none;
+  }
+  .location-phone:hover { color: var(--accent-yellow); }
+  .location-email {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #888;
+    text-decoration: none;
+  }
+
+  /* ========== FINAL CTA ========== */
+  .final-cta {
+    background: var(--bg-dark);
+    color: var(--text-light);
+    padding: 100px 5vw;
+    border-top: 1px solid var(--border-dark);
+    position: relative;
+    overflow: hidden;
+  }
+  .final-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 80% 50%, rgba(245, 184, 0, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .final-cta-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
+    position: relative;
+    z-index: 1;
+  }
+  .cta-left h2 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(32px, 4.5vw, 52px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+  .cta-left h2 em {
+    color: var(--accent-yellow);
+    font-style: italic;
+  }
+  .cta-left p {
+    font-size: 17px;
+    color: #c5c5c5;
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+  .cta-features {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .cta-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14px;
+    color: #aaa;
+  }
+  .cta-feature::before {
+    content: '→';
+    color: var(--accent-yellow);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  /* Form */
+  .cta-form {
+    background: var(--bg-dark-2);
+    border: 1px solid var(--border-dark);
+    border-radius: 12px;
+    padding: 32px;
+    position: relative;
+}
+  .cta-form::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: 24px; right: 24px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-orange), var(--accent-yellow));
+}
+.form-title {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+.form-label .req { 
+  color: var(--accent-orange); 
+  margin-left: 2px;
+}
+.form-required-note { 
+  font-size: 11px; 
+  color: #888; 
+  margin-bottom: 20px; 
+  font-family: 'JetBrains Mono', monospace; 
+}
+.form-subtitle {
+  color: #888;
+  font-size: 13px;
+  margin-bottom: 6px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.form-group {
+  margin-bottom: 16px;
+}
+.form-label {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 6px;
+}
+.form-input, .form-select {
+  width: 100%;
+  padding: 12px 14px;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid var(--border-dark);
+  border-radius: 4px;
+  color: var(--text-light);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+.form-input:focus, .form-select:focus {
+  outline: none;
+  border-color: var(--accent-yellow);
+}
+.form-submit {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(90deg, var(--accent-orange), var(--accent-yellow));
+  color: #1a1a1a;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 8px;
+  box-shadow: 0 4px 0 var(--accent-orange-dark);
+  transition: all 0.2s;
+}
+  .form-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 var(--accent-orange-dark);
+  }
+  .form-submit:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 var(--accent-orange-dark);
+  }
+  .form-divider {
+    text-align: center;
+    margin: 24px 0;
+    position: relative;
+    color: #555;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+  }
+  .form-divider::before, .form-divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 35%;
+    height: 1px;
+    background: var(--border-dark);
+  }
+  .form-divider::before { left: 0; }
+  .form-divider::after { right: 0; }
+  .form-phone {
+    text-align: center;
+  }
+  .form-phone-label {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 8px;
+  }
+  .form-phone-num {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 22px;
+    color: var(--accent-yellow);
+    text-decoration: none;
+    display: block;
+  }
+  .form-phone-num:hover { color: #ffd24d; }
+
+  /* GDPR elfogadás (checkbox) */
+  .consent-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #c5c5c5;
+  }
+  .consent-label input[type="checkbox"] {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    accent-color: var(--accent-yellow);
+    cursor: pointer;
+  }
+  .consent-label a { color: var(--accent-yellow); text-decoration: underline; }
+  .consent-label a:hover { color: #ffd24d; }
+  .consent-label .req { color: var(--accent-orange); margin-left: 2px; }
+
+  /* Form hibaüzenet */
+  .form-error {
+    display: none;
+    margin-top: 4px;
+    margin-bottom: 12px;
+    padding: 10px 14px;
+    background: rgba(232, 93, 31, 0.12);
+    border: 1px solid rgba(232, 93, 31, 0.4);
+    border-radius: 4px;
+    color: #f0a079;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .form-error.visible { display: block; }
+
+  /* Köszönő panel */
+  .cta-thankyou {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 420px;
+  }
+  .cta-thankyou[hidden] { display: none; }
+  .thankyou-check {
+    color: var(--accent-yellow);
+    margin-bottom: 20px;
+    animation: thankyou-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  @keyframes thankyou-pop {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .thankyou-title {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 26px;
+    color: var(--text-light);
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+  .thankyou-text {
+    font-size: 15px;
+    color: #c5c5c5;
+    line-height: 1.6;
+    max-width: 340px;
+    margin-bottom: 24px;
+  }
+  .thankyou-text strong { color: var(--accent-yellow); font-weight: 700; }
+  .thankyou-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 8px;
+  }
+  .thankyou-again {
+    margin-top: 28px;
+    background: transparent;
+    border: 1.5px solid #444;
+    color: #aaa;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .thankyou-again:hover {
+    border-color: var(--accent-yellow);
+    color: var(--accent-yellow);
+  }
+
+  /* Beküldés alatti gomb-állapot */
+  .form-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* ========== FOOTER ========== */
+  .footer {
+    background: #050505;
+    color: #666;
+    padding: 40px 5vw 24px;
+    border-top: 1px solid var(--border-dark);
+  }
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 12px;
+  }
+  .footer-disclaimer {
+    font-family: 'JetBrains Mono', monospace;
+    max-width: 600px;
+    line-height: 1.6;
+  }
+  .footer-disclaimer a { color: #999; text-decoration: underline; }
+  .footer-disclaimer a:hover { color: var(--accent-yellow); }
+  .footer-brand {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 14px;
+    color: #888;
+  }
+  .footer-brand span { color: var(--accent-yellow); }
+
+  /* ========== MOBILE ========== */
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    .trust-inner { grid-template-columns: 1fr; gap: 24px; }
+    .trust-divider { display: none; }
+    .trust-stats { grid-template-columns: repeat(2, 1fr); }
+    .why-grid { grid-template-columns: 1fr; }
+    .final-cta-inner { grid-template-columns: 1fr; gap: 40px; }
+    .nav-cta { display: none; }
+    .hero { padding-top: 100px; }
+    .hero-bg { background-position: 72% center; }
+    .hero-bg::after {
+      background:
+        linear-gradient(180deg,
+          rgba(8, 8, 8, 0.94) 0%,
+          rgba(8, 8, 8, 0.82) 45%,
+          rgba(8, 8, 8, 0.7) 100%),
+        radial-gradient(ellipse at 60% 30%, rgba(245, 184, 0, 0.1) 0%, transparent 55%);
+    }
+    .product-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+    .locations-grid { grid-template-columns: repeat(2, 1fr); }
+
+    /* Gépajánlat kártyák mobilon egymás alá, kép felülre */
+    .machine-card { grid-template-columns: 1fr; }
+    .machine-card:nth-child(even) .machine-media { order: 0; border-left: none; }
+    .machine-media {
+      border-right: none;
+      border-bottom: 1px solid var(--border-dark);
+      min-height: 220px;
+    }
+    .machine-body { padding: 28px 24px; }
+    .machines-header { align-items: flex-start; }
+    .machines-phone { text-align: left; }
+  }
+
+  @media (max-width: 600px) {
+    .product-grid { grid-template-columns: 1fr; }
+    .locations-grid { grid-template-columns: 1fr; }
+    .hero-actions { flex-direction: column; align-items: stretch; }
+    .btn-primary, .btn-secondary { justify-content: center; }
+    .machine-actions { flex-direction: column; align-items: stretch; }
+    .machine-call { text-align: center; }
+  }
+
+  /* Scroll animations */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">CHEMICAL<span>SEED</span></div>
+  <button class="nav-cta" onclick="document.getElementById('final-cta').scrollIntoView({behavior:'smooth'})">Hívjatok vissza</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Novemberi Akció · 2026.11.01–11.30</div>
+    <div class="hero-grid">
+      <div>
+        <h1>
+          Novemberi<br>
+          alkatrész<span class="accent"></span><br>
+          <span class="strike">akció.</span>
+        </h1>
+        <p class="hero-sub">
+          JCB, JOSKIN, Ascenso, Michelin és minden, ami a gépedet életben tartja a szezonban. <strong>Akár 35%-os kedvezménnyel</strong>, készletről, azonnal viheted — egész novemberben, vagy amíg el nem fogynak. Ráadásul a Tecnoma permetezőket bevezető áron, ajándék glifozáttal rendelheted elő.
+        </p>
+        <div class="hero-actions">
+          <a href="#products" class="btn-primary">
+            Megnézem az akciókat <span class="btn-arrow">→</span>
+          </a>
+          <a href="#final-cta" class="btn-secondary">
+            Visszahívást kérek
+          </a>
+        </div>
+        <div class="hero-microcopy">
+          <span>Készletről, máris</span>
+          <span>6 telephely országszerte</span>
+          <span>35 éve a gazdák mellett</span>
+        </div>
+      </div>
+
+      <div class="countdown-box">
+        <div class="countdown-label">Meddig tart?</div>
+        <div class="countdown-title">2026. november 30-ig</div>
+        <div class="countdown-grid">
+          <div class="countdown-unit">
+            <div class="countdown-num" id="days">--</div>
+            <div class="countdown-text">Nap</div>
+          </div>
+          <div class="countdown-unit">
+            <div class="countdown-num" id="hours">--</div>
+            <div class="countdown-text">Óra</div>
+          </div>
+          <div class="countdown-unit">
+            <div class="countdown-num" id="minutes">--</div>
+            <div class="countdown-text">Perc</div>
+          </div>
+          <div class="countdown-unit">
+            <div class="countdown-num" id="seconds">--</div>
+            <div class="countdown-text">MP</div>
+          </div>
+        </div>
+        <div class="countdown-footer">
+          // Vagy amíg a raktárkészlet bírja.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<section class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-brands">
+      <div class="brand-pill">JCB</div>
+      <div class="brand-pill">KUHN</div>
+      <div class="brand-pill">JOSKIN</div>
+      <div class="brand-pill">KUBOTA</div>
+      <div class="brand-pill">ASCENSO</div>
+      <div class="brand-pill">TOTAL</div>
+      <div class="brand-pill">SAMASZ</div>
+      <div class="brand-pill">ROLMAKO</div>
+      <div class="brand-pill">TECNOMA</div>
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-stats">
+      <div class="trust-stat">
+        <div class="trust-stat-num">35+</div>
+        <div class="trust-stat-label">Év</div>
+      </div>
+      <div class="trust-stat">
+        <div class="trust-stat-num">100+</div>
+        <div class="trust-stat-label">Munkatárs</div>
+      </div>
+      <div class="trust-stat">
+        <div class="trust-stat-num">30+</div>
+        <div class="trust-stat-label">Szervizes</div>
+      </div>
+      <div class="trust-stat">
+        <div class="trust-stat-num">6</div>
+        <div class="trust-stat-label">Telephely</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="problem-inner">
+    <div class="section-eyebrow">// Szezonzárás előtt</div>
+    <h2>Mire beáll a tél, ne alkatrész után kelljen futnod.</h2>
+    <p>
+      Egy leállás nem csak órákba kerül — a következő szezon indulását is megcsúsztatja. Nálunk pont ezért van a polcon, ami kell: gömbcsukló, fülkebak és koptatóbetét a rakodóhoz, LED fényszóró a rövidülő napokra, Ascenso és Michelin abroncs a munkagépre, vonófej és vákum olaj a JOSKIN gépekhez. Novemberben mindezt kedvezőbb áron viheted, mint máskor.
+    </p>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="products-inner">
+    <div class="products-header">
+      <div class="products-title-block">
+        <h2>Novemberi akciók</h2>
+        <div class="count">15 termék · készletről, máris vihetők</div>
+      </div>
+      <div class="products-meta">
+        <div class="live">Élő ajánlatok</div>
+        <div>Utoljára frissítve: 2026.11.01</div>
+      </div>
+    </div>
+
+    <div class="filter-bar">
+      <button class="filter-pill active" data-filter="all">Minden <span class="count">(15)</span></button>
+      <button class="filter-pill" data-filter="alkatresz">Gépalkatrész <span class="count">(6)</span></button>
+      <button class="filter-pill" data-filter="elektromos">Elektromos alkatrész <span class="count">(3)</span></button>
+      <button class="filter-pill" data-filter="kenoanyag">Kenőanyag &amp; olaj <span class="count">(2)</span></button>
+      <button class="filter-pill" data-filter="szerszam">Szerszám <span class="count">(2)</span></button>
+      <button class="filter-pill" data-filter="merch">Merch <span class="count">(2)</span></button>
+    </div>
+
+    <div class="product-grid">
+
+      <!-- 1. JOSKIN Vonófej D50 100 - 110 -->
+      <div class="product-card" data-category="alkatresz">
+        <div class="product-image">
+          <img class="product-photo" src="01.jpg" alt="" loading="lazy" onerror="this.classList.add('img-failed')">
+          <div class="product-badge">-23%</div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Gépalkatrész · JOSKIN</div>
+          <div class="product-name">JOSKIN Vonófej D50 100 - 110</div>
+          <div class="product-sku">Cikkszám: 9274007109</div>
+          <div class="product-price-row">
+            <span class="product-price-original">114.000 HUF + ÁFA</span>
+            <span class="product-price-discount">-26.000 HUF</span>
+          </div>
+          <div class="product-price-current">88.000 HUF <span class="product-price-vat">+ ÁFA</span></div>
+          <div class="product-actions">
+            <button class="btn-card-primary" onclick="csSelectProduct('Gépalkatrészek (akkumulátor, önindító, fék, sárvédő, KUHN ekevas...)')">Kérem ezt</button>
+            <button class="btn-card-icon" aria-label="Részletek">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. JCB Sapka — gyerek -->
+      <div class="product-card" data-category="merch">
+        <div class="product-image">
+          <img class="product-photo" src="02.jpg" alt="" loading="lazy" onerror="this.classList.add('img-failed')">
+          <div class="product-badge">-9%</div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Merch · JCB</div>
+          <div class="product-name">JCB Sapka — gyerek</div>
+          <div class="product-sku">Cikkszám: JCB3203</div>
+          <div class="product-price-row">
+            <span class="product-price-original">5.250 HUF + ÁFA</span>
+            <span class="product-price-discount">-450 HUF</span>
+          </div>
+          <div class="product-price-current">4.800 HUF <span class="product-price-vat">+ ÁFA</span></div>
+          <div class="product-actions">
+            <button class="btn-card-primary" onclick="csSelectProduct('JCB mellény / dzseki / merch')">Kérem ezt</button>
+            <button class="btn-card-icon" aria-label="Részletek">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. WÜRTH féktisztító spray -->
+      <div class="product-card" data-category="kenoanyag">
+        <div class="product-image">
+          <img class="product-photo" src="03.jpg" alt="" loading="lazy" onerror="this.classList.add('img-failed')">
+          <div class="product-badge">-23%</div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Karbantartás · WÜRTH</div>
+          <div class="product-name">WÜRTH féktisztító spray</div>
+          <div class="product-sku">Cikkszám: 8901087</div>
+          <div class="product-price-row">
+            <span class="product-price-original">1.100 HUF + ÁFA</span>
+            <span class="product-price-discount">-250 HUF</span>
+          </div>
+          <div class="product-price-current">850 HUF <span class="product-price-vat">+ ÁFA</span></div>
+          <div class="product-actions">
+            <button class="btn-card-primary" onclick="csSelectProduct('Kenőanyagok & olajok (TOTAL olaj, Gém Wax)')">Kérem ezt</button>
+            <button class="btn-card-icon" aria-label="Részletek">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Ascenso MIR221 500/70R24 PR 164A8/B TL betonmintás -->
+      <div class="product-card" data-category="alkatresz">
+        <div class="product-image">
+          <img class="product-photo" src="04.jpg" alt="" loading="lazy" onerror="this.classList.add('img-failed')">
+          <div class="product-badge">-14%</div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Abroncs · Ascenso</div>
+          <div class="product-name">Ascenso MIR221 500/70R24 PR 164A8/B TL betonmintás</div>
+          <div class="product-sku">Cikkszám: 8904365504499</div>
+          <div class="product-price-row">
+            <span class="product-price-original">250.000 HUF + ÁFA</span>
+            <span class="product-price-discount">-35.000 HUF</span>
+          </div>
+          <div class="product-price-current">215.000 HUF <span class="product-price-vat">+ ÁFA</span></div>
+          <div class="product-actions">
+            <button class="btn-card-primary" onclick="csSelectProduct('Gépalkatrészek (akkumulátor, önindító, fék, sárvédő, KUHN ekevas...)')">Érdeklődöm</button>
+            <button class="btn-card-icon" aria-label="Részletek">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. JCB LED fényszóró szett -->
+      <div class="product-card" data-category="elektromos">
+        <div class="product-image">
+          <img class="product-photo" src="05.jpg" alt="" loading="lazy" onerror="this.classList.add('img-failed')">
+          <div class="product-badge">-14%</div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Elektromos · JCB</div>
+          <div class="product-name">JCB LED fényszóró szett</div>
+          <div class="product-sku">Cikkszám: SIM0027</div>
+          <div class="product-price-row">
+            <span class="product-price-original">99.000 HUF + ÁFA</span>
+            <span class="product-price-discount">-14.000 HUF</span>
+          </div>
+          <div class="product-price-current">85.000 HUF <span class="product-price-vat">+ ÁFA</span></div>
+          <div class="product-actions">
+            <button class="btn-card-primary" onclick="csSelectProduct('Gépalkatrészek (akkumulátor, önindító, fék, sárvédő, KUHN ekevas...)')">Kérem ezt</button>
+            <button class="btn-card-icon" aria-label="Részletek">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. JCB Sebesség jeladó — teleszkópos rakodókhoz (2004-2025) -->
+      <div class="product-card" data-category="elektromos">
+        <div class="product-image">
+          <img class="product-photo" src="06.jpg" alt="" loading="lazy" onerror="this.classList.add('img-failed')">
+          <div class="product-badge">-30%</div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Elektromos · JCB</div>
+          <div class="product-name">JCB Sebesség jeladó — teleszkópos rakodókhoz (2004-2025)</div>
+          <div class="product-sku">Cikkszám: 716/D2729</div>
+          <div class="product-price-row">
+            <span class="product-price-original">67.855 HUF + ÁFA</span>
+            <span class="product-price-discount">-20.655 HUF</span>
+          </div>
+          <div class="product-price-current">47.200 HUF <span class="product-price-vat">+ ÁFA</span></div>
+          <div class="product-actions">
+            <button class="btn-card-primary" onclick="csSelectProduct('Gépalkatrészek (akkumulátor, önindító, fék, sárvédő, KUHN ekevas...)')">Kérem ezt</button>
+            <button class="btn-card-icon" aria-label="Részletek">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. JCB Pro 18PAG-125 akkus sarokcsiszoló 18V 125mm -->
+      <div class="product-card" data-category="szerszam">
+        <div class="product-image">
+          <img class="product-photo" src="07.jpg" alt="" loading="lazy" onerror="this.classList.add('img-failed')">
+          <div class="product-badge">-6%</div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Szerszám · JCB</div>
+          <div class="product-name">JCB Pro 18PAG-125 akkus sarokcsiszoló 18V 125mm</div>
+          <div class="product-sku">Cikkszám: A-38140104</div>
+          <div class="product-price-row">
+            <span class="product-price-original">54.010 HUF + ÁFA</span>
+            <span class="product-price-discount">-3.010 HUF</span>
+          </div>
+          <div class="product-price-current">51.000 HUF <span class="product-price-vat">+ ÁFA</span></div>
+          <div class="product-actions">
+            <button class="btn-card-primary" onclick="csSelectProduct('Szerszám (szerszámkészlet, munkalámpa)')">Kérem ezt</button>
+            <button class="btn-card-icon" aria-label="Részletek">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8. JOSKIN vákum olaj 5L -->
+      <div class="product-card" data-category="kenoanyag">
+        <div class="product-image">
+          <img class="product-photo" src="08.jpg" alt="" loading="lazy" onerror="this.classList.add('img-failed')">
+          <div class="product-badge">-22%</div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Olaj · JOSKIN</div>
+          <div class="product-name">JOSKIN vákum olaj 5L</div>
+          <div class="product-sku">Cikkszám: J34560076</div>
+          <div class="product-price-row">
+            <span class="product-price-original">22.500 HUF + ÁFA</span>
+            <span class="product-price-discount">-5.000 HUF</span>
+          </div>
+          <div class="product-price-current">17.500 HUF <span class="product-price-vat">+ ÁFA</span></div>
+          <div class="product-actions">
+            <button class="btn-card-primary" onclick="csSelectProduct('Kenőanyagok & olajok (TOTAL olaj, Gém Wax)')">Kérem ezt</button>
+            <button class="btn-card-icon" aria-label="Részletek">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9. JCB DEF szintadó -->
+      <div class="product-card" data-category="elektromos">
+        <div class="product-image">
+          <img class="product-photo" src="09.jpg" alt="" loading="lazy" onerror="this.classList.add('img-failed')">
+          <div class="product-badge">-26%</div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Elektromos · JCB</div>
+          <div class="product-name">JCB DEF szintadó</div>
+          <div class="product-sku">Cikkszám: 320/D9237</div>
+          <div class="product-price-row">
+            <span class="product-price-original">402.185 HUF + ÁFA</span>
+            <span class="product-price-discount">-103.185 HUF</span>
+          </div>
+          <div class="product-price-current">299.000 HUF <span class="product-price-vat">+ ÁFA</span></div>
+          <div class="product-actions">
+            <button class="btn-card-primary" onclick="csSelectProduct('Gépalkatrészek (akkumulátor, önindító, fék, sárvédő, KUHN ekevas...)')">Érdeklődöm</button>
+            <button class="btn-card-icon" aria-label="Részletek">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 10. JCB Gömbcsukló — teleszkópos rakodókhoz (2004-2026) -->
+      <div class="product-card" data-category="alkatresz">
+        <div class="product-image">
+          <img class="product-photo" src="10.jpg" alt="" loading="lazy" onerror="this.classList.add('img-failed')">
+          <div class="product-badge">-21%</div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Gépalkatrész · JCB</div>
+          <div class="product-name">JCB Gömbcsukló — teleszkópos rakodókhoz (2004-2026)</div>
+          <div class="product-sku">Cikkszám: 448/17902</div>
+          <div class="product-price-row">
+            <span class="product-price-original">70.010 HUF + ÁFA</span>
+            <span class="product-price-discount">-14.810 HUF</span>
+          </div>
+          <div class="product-price-current">55.200 HUF <span class="product-price-vat">+ ÁFA</span></div>
+          <div class="product-actions">
+            <button class="btn-card-primary" onclick="csSelectProduct('Gépalkatrészek (akkumulátor, önindító, fék, sárvédő, KUHN ekevas...)')">Kérem ezt</button>
+            <button class="btn-card-icon" aria-label="Részletek">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 11. JCB Fülkebak jobb első — teleszkópos rakodókhoz (2019-2026) -->
+      <div class="product-card" data-category="alkatresz">
+        <div class="product-image">
+          <img class="product-photo" src="11.jpg" alt="" loading="lazy" onerror="this.classList.add('img-failed')">
+          <div class="product-badge">-31%</div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Gépalkatrész · JCB</div>
+          <div class="product-name">JCB Fülkebak jobb első — teleszkópos rakodókhoz (2019-2026)</div>
+          <div class="product-sku">Cikkszám: 402/D0647</div>
+          <div class="product-price-row">
+            <span class="product-price-original">90.070 HUF + ÁFA</span>
+            <span class="product-price-discount">-28.170 HUF</span>
+          </div>
+          <div class="product-price-current">61.900 HUF <span class="product-price-vat">+ ÁFA</span></div>
+          <div class="product-actions">
+            <button class="btn-card-primary" onclick="csSelectProduct('Gépalkatrészek (akkumulátor, önindító, fék, sárvédő, KUHN ekevas...)')">Kérem ezt</button>
+            <button class="btn-card-icon" aria-label="Részletek">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 12. JCB Kötött sapka — felnőtt -->
+      <div class="product-card" data-category="merch">
+        <div class="product-image">
+          <img class="product-photo" src="12.jpg" alt="" loading="lazy" onerror="this.classList.add('img-failed')">
+          <div class="product-badge">-18%</div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Merch · JCB</div>
+          <div class="product-name">JCB Kötött sapka — felnőtt</div>
+          <div class="product-sku">Cikkszám: JCB1610</div>
+          <div class="product-price-row">
+            <span class="product-price-original">2.250 HUF + ÁFA</span>
+            <span class="product-price-discount">-400 HUF</span>
+          </div>
+          <div class="product-price-current">1.850 HUF <span class="product-price-vat">+ ÁFA</span></div>
+          <div class="product-actions">
+            <button class="btn-card-primary" onclick="csSelectProduct('JCB mellény / dzseki / merch')">Kérem ezt</button>
+            <button class="btn-card-icon" aria-label="Részletek">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 13. Michelin XMCL 460/70R24 DW14L abroncs traktormintás -->
+      <div class="product-card" data-category="alkatresz">
+        <div class="product-image">
+          <img class="product-photo" src="13.jpg" alt="" loading="lazy" onerror="this.classList.add('img-failed')">
+          <div class="product-badge">-35%</div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Abroncs · Michelin</div>
+          <div class="product-name">Michelin XMCL 460/70R24 DW14L abroncs traktormintás</div>
+          <div class="product-sku">Cikkszám: XMCL460/70R24</div>
+          <div class="product-price-row">
+            <span class="product-price-original">430.000 HUF + ÁFA</span>
+            <span class="product-price-discount">-150.000 HUF</span>
+          </div>
+          <div class="product-price-current">280.000 HUF <span class="product-price-vat">+ ÁFA</span></div>
+          <div class="product-actions">
+            <button class="btn-card-primary" onclick="csSelectProduct('Gépalkatrészek (akkumulátor, önindító, fék, sárvédő, KUHN ekevas...)')">Érdeklődöm</button>
+            <button class="btn-card-icon" aria-label="Részletek">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 14. JCB Koptatóbetét — teleszkópos rakodókhoz (2004-2026) -->
+      <div class="product-card" data-category="alkatresz">
+        <div class="product-image">
+          <img class="product-photo" src="14.jpg" alt="" loading="lazy" onerror="this.classList.add('img-failed')">
+          <div class="product-badge">-14%</div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Gépalkatrész · JCB</div>
+          <div class="product-name">JCB Koptatóbetét — teleszkópos rakodókhoz (2004-2026)</div>
+          <div class="product-sku">Cikkszám: 402/G1578</div>
+          <div class="product-price-row">
+            <span class="product-price-original">25.650 HUF + ÁFA</span>
+            <span class="product-price-discount">-3.500 HUF</span>
+          </div>
+          <div class="product-price-current">22.150 HUF <span class="product-price-vat">+ ÁFA</span></div>
+          <div class="product-actions">
+            <button class="btn-card-primary" onclick="csSelectProduct('Gépalkatrészek (akkumulátor, önindító, fék, sárvédő, KUHN ekevas...)')">Kérem ezt</button>
+            <button class="btn-card-icon" aria-label="Részletek">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 15. JCB TOOLS 18PGG-VS zsírzópisztoly 18V (akksi és töltő nélkül) -->
+      <div class="product-card" data-category="szerszam">
+        <div class="product-image">
+          <img class="product-photo" src="15.jpg" alt="" loading="lazy" onerror="this.classList.add('img-failed')">
+          <div class="product-badge">-6%</div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Szerszám · JCB</div>
+          <div class="product-name">JCB TOOLS 18PGG-VS zsírzópisztoly 18V (akksi és töltő nélkül)</div>
+          <div class="product-sku">Cikkszám: A-38120221</div>
+          <div class="product-price-row">
+            <span class="product-price-original">45.720 HUF + ÁFA</span>
+            <span class="product-price-discount">-2.720 HUF</span>
+          </div>
+          <div class="product-price-current">43.000 HUF <span class="product-price-vat">+ ÁFA</span></div>
+          <div class="product-actions">
+            <button class="btn-card-primary" onclick="csSelectProduct('Szerszám (szerszámkészlet, munkalámpa)')">Kérem ezt</button>
+            <button class="btn-card-icon" aria-label="Részletek">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MACHINES / TECNOMA GÉPAJÁNLAT -->
+<section class="machines" id="machines">
+  <div class="machines-inner">
+    <div class="machines-header">
+      <div class="machines-title-block">
+        <div class="section-eyebrow">// Gépajánlat · Bevezető ár</div>
+        <h2>Tecnoma permetező. <em>Ajándék</em> glifozát.</h2>
+        <p class="machines-sub">
+          Rendeld elő a Tecnoma permeteződet bevezető áron, és mellé <strong>ajándék ClinicUp glifozátot</strong> adunk a szezonra. Az ajánlat <strong>2026. december 31-ig</strong> érvényes, a részletekről érdeklődj értékesítő kollégáinknál.
+        </p>
+      </div>
+      <div class="machines-phone">
+        <div class="machines-phone-label">Gépértékesítés</div>
+        <a href="tel:+36306990624">+36 30 699 0624</a>
+      </div>
+    </div>
+
+    <div class="machine-list">
+
+      <!-- 1 -->
+      <article class="machine-card">
+        <div class="machine-media">
+          <img class="machine-photo" src="tecnis-3124.jpg" alt="Tecnoma TECNIS 3124 permetezőgép" loading="lazy" onerror="this.classList.add('img-failed')">
+          <span class="machine-badge">Bevezető ár</span>
+        </div>
+        <div class="machine-body">
+          <div class="machine-brand">TECNOMA</div>
+          <h3 class="machine-name">TECNIS 3124</h3>
+          <p class="machine-spec">Tecnoma permetezőgép. Ajándék 400 liter ClinicUp glifozát — 100 hektár kezeléséhez.</p>
+          <span class="machine-price-label">Bevezető ár</span>
+          <div class="machine-price">48.990 <span>EUR-tól</span></div>
+          <div class="machine-actions">
+            <button type="button" class="machine-btn" onclick="csSelectMachine('Tecnoma — TECNIS 3124')">Érdeklődöm</button>
+            <a class="machine-call" href="tel:+36306990624">+36 30 699 0624</a>
+            <a class="machine-call" href="https://www.ujdonsag.chemicalseed.hu/tecnoma.html" target="_blank" rel="noopener">Részletek</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2 -->
+      <article class="machine-card">
+        <div class="machine-media">
+          <img class="machine-photo" src="tecnis-4524.jpg" alt="Tecnoma TECNIS 2 4524 permetezőgép" loading="lazy" onerror="this.classList.add('img-failed')">
+          <span class="machine-badge">Bevezető ár</span>
+        </div>
+        <div class="machine-body">
+          <div class="machine-brand">TECNOMA</div>
+          <h3 class="machine-name">TECNIS 2 4524</h3>
+          <p class="machine-spec">Tecnoma permetezőgép. Ajándék 600 liter ClinicUp glifozát — 150 hektár kezeléséhez.</p>
+          <span class="machine-price-label">Bevezető ár</span>
+          <div class="machine-price">78.500 <span>EUR-tól</span></div>
+          <div class="machine-actions">
+            <button type="button" class="machine-btn" onclick="csSelectMachine('Tecnoma — TECNIS 2 4524')">Érdeklődöm</button>
+            <a class="machine-call" href="tel:+36306990624">+36 30 699 0624</a>
+            <a class="machine-call" href="https://www.ujdonsag.chemicalseed.hu/tecnoma.html" target="_blank" rel="noopener">Részletek</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why">
+  <div class="why-inner">
+    <div class="why-header">
+      <div class="section-eyebrow">// Miért mi</div>
+      <h2>Nem az első <em>novemberünk</em>.</h2>
+      <p class="why-sub">Harmincöt éve a magyar agráriumban — most már hat telephellyel és komoly márkaképviseletekkel a hátunk mögött.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-card-num">35<sup>év</sup></div>
+        <h3>1990 óta<br>a földeken</h3>
+        <p>Vetőmaggal és növényvédelemmel kezdtük még a rendszerváltáskor — ma már gépekkel, alkatrészekkel és szervízzel is itt vagyunk a gazdák mellett. Nem most kezdtük, és nem is most fogjuk abbahagyni.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-num">3<sup>brand</sup></div>
+        <h3>Hivatalos<br>márkaképviselet</h3>
+        <p>A műszaki üzletágunk a JCB, Kuhn és Joskin hivatalos magyarországi forgalmazója. Eredeti alkatrészt kapsz, gyári garanciával — semmi kompromisszum.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-num">6<sup>telephely</sup></div>
+        <h3>Hat telephely<br>az ország minden táján</h3>
+        <p>Az újhartyáni központ mellett Békésen, Jászfényszarun, Kabán, Kaposváron és Pápán is megtaláltok minket. A legközelebbi raktár szinte sosincs egy óránál messzebb.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATIONS -->
+<section class="locations">
+  <div class="locations-inner">
+    <div class="locations-header">
+      <h2>Telephelyeink</h2>
+      <div class="locations-sub">// Hat ponton az ország teljes területén — válaszd ki, melyik van hozzád közelebb</div>
+    </div>
+    <div class="locations-grid">
+      <div class="location-card central">
+        <div class="location-name">Újhartyán</div>
+        <div class="location-tag">Központ · M5 mellett</div>
+        <a href="tel:+36305723319" class="location-phone">+36 30 572 3319</a>
+        <a href="mailto:rendeles@chemicalseed.hu" class="location-email">rendeles@chemicalseed.hu</a>
+      </div>
+      <div class="location-card">
+        <div class="location-name">Békés</div>
+        <div class="location-tag">Telephely</div>
+        <a href="tel:+36302377403" class="location-phone">+36 30 237 7403</a>
+        <a href="mailto:rendelesbekes@chemicalseed.hu" class="location-email">rendelesbekes@chemicalseed.hu</a>
+      </div>
+      <div class="location-card">
+        <div class="location-name">Jászfényszaru</div>
+        <div class="location-tag">Telephely</div>
+        <a href="tel:+36303732826" class="location-phone">+36 30 373 2826</a>
+        <a href="mailto:rendelesjasz@chemicalseed.hu" class="location-email">rendelesjasz@chemicalseed.hu</a>
+      </div>
+      <div class="location-card">
+        <div class="location-name">Kaba</div>
+        <div class="location-tag">Telephely</div>
+        <a href="tel:+36303732631" class="location-phone">+36 30 373 2631</a>
+        <a href="mailto:rendeleskaba@chemicalseed.hu" class="location-email">rendeleskaba@chemicalseed.hu</a>
+      </div>
+      <div class="location-card">
+        <div class="location-name">Kaposvár</div>
+        <div class="location-tag">Telephely</div>
+        <a href="tel:+36303731482" class="location-phone">+36 30 373 1482</a>
+        <a href="mailto:rendeleskaposvar@chemicalseed.hu" class="location-email">rendeleskaposvar@chemicalseed.hu</a>
+      </div>
+      <div class="location-card">
+        <div class="location-name">Pápa</div>
+        <div class="location-tag">Telephely</div>
+        <a href="tel:+36307108904" class="location-phone">+36 30 710 8904</a>
+        <a href="mailto:rendelespapa@chemicalseed.hu" class="location-email">rendelespapa@chemicalseed.hu</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta" id="final-cta">
+  <div class="final-cta-inner">
+    <div class="cta-left">
+      <div class="section-eyebrow">// Kapcsolat</div>
+      <h2>Kérdésed van? <em>Visszahívunk.</em></h2>
+      <p>Hagyj itt egy telefonszámot, és mondd el, mi érdekel — a megfelelő kollégánk pár órán belül jelentkezni fog. Készlet, ár, szállítás, akár szerelési tanács, mindenben tudunk segíteni.</p>
+      <div class="cta-features">
+        <div class="cta-feature">Hamarosan visszahívunk téged</div>
+        <div class="cta-feature">Semmilyen kötelezettséget nem vállalsz vele</div>
+        <div class="cta-feature">Az akciós árat a készlet erejéig garantáljuk</div>
+        <div class="cta-feature">Bármelyik telephelyünkhöz tudunk irányítani</div>
+      </div>
+    </div>
+
+    <form class="cta-form" id="cs-leadform" action="https://xtratech.us18.list-manage.com/subscribe/post?u=859ff0560bf14ca6c051f7f8e&amp;id=4774a6baa8&amp;f_id=002babe6f0" method="post" target="_blank" novalidate>
+      <div class="form-title">Visszahívást kérek</div>
+      <div class="form-subtitle">// 30 másodperc alatt kitölthető</div>
+      <div class="form-required-note"><span class="req" style="color:var(--accent-orange)">*</span> A csillaggal jelölt mezők kötelezőek</div>
+
+      <div class="form-group">
+        <label class="form-label" for="mce-LNAME">Vezetékneved<span class="req">*</span></label>
+        <input type="text" name="LNAME" id="mce-LNAME" class="form-input" placeholder="Kovács" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="mce-FNAME">Keresztneved<span class="req">*</span></label>
+        <input type="text" name="FNAME" id="mce-FNAME" class="form-input" placeholder="János" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="mce-EMAIL">E-mail címed<span class="req">*</span></label>
+        <input type="email" name="EMAIL" id="mce-EMAIL" class="form-input" placeholder="janos@example.hu" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="mce-PHONE">Telefonszámod<span class="req">*</span></label>
+        <input type="text" name="PHONE" id="mce-PHONE" class="form-input" placeholder="+36 30 123 4567" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="mce-MMERGE18">Melyik telephely van hozzád közel?<span class="req">*</span></label>
+        <select name="MMERGE18" id="mce-MMERGE18" class="form-select" required>
+          <option value="">Válassz…</option>
+          <option value="Újhartyán">Újhartyán (központ)</option>
+          <option value="Békés">Békés</option>
+          <option value="Jászfényszaru">Jászfényszaru</option>
+          <option value="Kaba">Kaba</option>
+          <option value="Kaposvár">Kaposvár</option>
+          <option value="Pápa">Pápa</option>
+          <option value="Még nem tudom">Még nem tudom</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="mce-MMERGE20">Mi érdekel?<span class="req">*</span></label>
+        <select name="MMERGE20" id="mce-MMERGE20" class="form-select" required>
+          <option value="">Válassz…</option>
+          <option value="Az egész akció érdekel">Az egész akció érdekel</option>
+          <option value="Gépek (SaMASZ, Rolmako, Tecnoma, JOSKIN)">Gépek (SaMASZ, Rolmako, Tecnoma, JOSKIN)</option>
+          <option value="Kenőanyagok &amp; olajok (TOTAL olaj, Gém Wax)">Kenőanyagok &amp; olajok (TOTAL olaj, Gém Wax)</option>
+          <option value="Gépalkatrészek (akkumulátor, önindító, fék, sárvédő, KUHN ekevas...)">Gépalkatrészek (akkumulátor, önindító, fék, sárvédő, KUHN ekevas...)</option>
+          <option value="Szerszám (szerszámkészlet, munkalámpa)">Szerszám (szerszámkészlet, munkalámpa)</option>
+          <option value="JCB mellény / dzseki / merch">JCB mellény / dzseki / merch</option>
+          <option value="Egyéb - majd elmondom telefonon">Egyéb — majd elmondom telefonon</option>
+        </select>
+      </div>
+
+      <div class="form-group form-consent">
+        <label class="consent-label" for="mce-MMERGE110">
+          <input type="checkbox" name="MMERGE11" id="mce-MMERGE110" value="Igen" required>
+          <span>Elolvastam és elfogadom az <a href="https://chemicalseed.hu/adatvedelmi-tajekoztato" target="_blank" rel="noopener">adatkezelési tájékoztatót</a>.<span class="req">*</span></span>
+        </label>
+      </div>
+
+
+      <!-- Mailchimp tag (a listához kötött automatizációhoz szükséges) -->
+      <div hidden><input type="hidden" name="tags" value="3055962"></div>
+
+      <!-- Mailchimp bot-csapda: NE töltsd ki, ne töröld, maradjon rejtve -->
+      <div aria-hidden="true" style="position:absolute; left:-5000px;">
+        <input type="text" name="b_859ff0560bf14ca6c051f7f8e_4774a6baa8" tabindex="-1" value="">
+      </div>
+
+      <div id="cs-form-error" class="form-error" role="alert"></div>
+      
+
+      <button type="submit" name="subscribe" class="form-submit">Visszahívást kérek →</button>
+
+      <div class="form-divider">VAGY</div>
+
+      <div class="form-phone">
+        <div class="form-phone-label">Hívd közvetlenül az alkatrészkereskedelmet:</div>
+        <a href="tel:+36305723319" class="form-phone-num">+36 30 572 3319</a>
+      </div>
+    </form>
+
+    <!-- KÖSZÖNŐ PANEL: beküldés után jelenik meg, a form helyén -->
+    <div class="cta-form cta-thankyou" id="cs-thankyou" hidden>
+      <div class="thankyou-check" aria-hidden="true">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+          <circle cx="20" cy="20" r="19" stroke="currentColor" stroke-width="2"/>
+          <path d="M12 20.5L17.5 26L28 14.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="thankyou-title">Köszönjük, megkaptuk!</div>
+      <p class="thankyou-text">
+        Felvettük az adataidat. Hamarosan visszahív a megfelelő kollégánk, a kiválasztott telephelyről.
+      </p>
+      <p class="thankyou-sub">// Sürgős? Hívj minket közvetlenül:</p>
+      <a href="tel:+36305723319" class="form-phone-num">+36 30 572 3319</a>
+      <button type="button" class="thankyou-again" id="cs-form-again">Új érdeklődés küldése</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-disclaimer">
+      Az alkatrészakció 2026.11.01-től 11.30-ig érvényes, vagy amíg a raktárkészlet bírja. A Tecnoma gépajánlat 2026. december 31-ig érvényes.<br>
+      A feltüntetett árak az ÁFÁ-t nem tartalmazzák. A képek illusztrációk.<br>
+      <a href="https://chemicalseed.hu/adatvedelmi-tajekoztato" target="_blank" rel="noopener">Adatkezelési tájékoztató</a>
+    </div>
+    <div class="footer-brand">CHEMICAL<span>SEED</span> · www.chemicalseed.hu</div>
+  </div>
+</footer>
+
+<script>
+  // Countdown timer
+  const targetDate = new Date('2026-11-30T23:59:59').getTime();
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+    if (distance < 0) {
+      document.getElementById('days').textContent = '0';
+      document.getElementById('hours').textContent = '0';
+      document.getElementById('minutes').textContent = '0';
+      document.getElementById('seconds').textContent = '0';
+      return;
+    }
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    document.getElementById('days').textContent = String(days).padStart(2, '0');
+    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // Gépajánlat "Érdeklődöm" – előválasztja a JOSKIN opciót és a kapcsolat-formhoz görget
+  window.csSelectMachine = function(model) {
+    const sel = document.getElementById('mce-MMERGE20');
+    if (sel) {
+      const opt = Array.from(sel.options).find(o => o.value === 'Gépek (SaMASZ, Rolmako, Tecnoma, JOSKIN)');
+      if (opt) sel.value = opt.value;
+    }
+    const target = document.getElementById('final-cta');
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  // Termékkártya "Érdeklődöm/Kérem ezt" – a kapcsolat-formhoz görget és beállítja a kategóriát
+  window.csSelectProduct = function(category) {
+    const sel = document.getElementById('mce-MMERGE20');
+    if (sel && category) {
+      const opt = Array.from(sel.options).find(o => o.value === category);
+      if (opt) sel.value = opt.value;
+    }
+    const target = document.getElementById('final-cta');
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  // Filter pills interaction
+  document.querySelectorAll('.filter-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      const filter = pill.getAttribute('data-filter');
+      document.querySelectorAll('.product-card').forEach(card => {
+        const cat = card.getAttribute('data-category');
+        if (filter === 'all' || cat === filter) {
+          card.style.display = '';
+          // ujra-trigger a fade-in animaciot
+          requestAnimationFrame(() => card.classList.add('visible'));
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.product-card, .why-card, .location-card, .machine-card').forEach(el => {
+    el.classList.add('fade-in');
+    observer.observe(el);
+  });
+
+  // ===== Lead form beküldés (Mailchimp, JSONP – az oldal nem tölt újra) =====
+  (function() {
+    const form = document.getElementById('cs-leadform');
+    if (!form) return;
+    const errorBox = document.getElementById('cs-form-error');
+    const thankyou = document.getElementById('cs-thankyou');
+    const submitBtn = form.querySelector('.form-submit');
+    const againBtn = document.getElementById('cs-form-again');
+
+    function showError(msg) {
+      errorBox.innerHTML = msg;
+      errorBox.classList.add('visible');
+    }
+    function clearError() {
+      errorBox.classList.remove('visible');
+      errorBox.innerHTML = '';
+    }
+
+    // JSONP hívás a Mailchimp post-json végpontjára
+    function jsonpSubmit(url, callback) {
+      const cbName = 'mcCallback_' + Date.now();
+      window[cbName] = function(data) {
+        callback(data);
+        delete window[cbName];
+        script.remove();
+      };
+      const script = document.createElement('script');
+      script.src = url + '&c=' + cbName;
+      script.onerror = function() {
+        callback({ result: 'error', msg: 'network' });
+        delete window[cbName];
+        script.remove();
+      };
+      document.body.appendChild(script);
+    }
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      clearError();
+
+      // Kliensoldali ellenőrzés (a böngésző natív üzenetei + saját)
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      submitBtn.disabled = true;
+      const origLabel = submitBtn.textContent;
+      submitBtn.textContent = 'Küldés…';
+
+      // Az action URL-t post-json-ra cseréljük a JSONP-hez
+      const actionUrl = form.getAttribute('action').replace('/post?', '/post-json?');
+      const params = new URLSearchParams(new FormData(form)).toString();
+      const url = actionUrl + '&' + params;
+
+      jsonpSubmit(url, function(data) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = origLabel;
+
+        if (data && data.result === 'success') {
+          form.hidden = true;
+          thankyou.hidden = false;
+          thankyou.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          // Mailchimp hibaüzenet (HTML-t adhat vissza), vagy hálózati hiba
+          let msg = (data && data.msg) ? data.msg : '';
+          if (msg === 'network') {
+            msg = 'Hálózati hiba történt. Kérlek próbáld újra, vagy hívj minket telefonon.';
+          } else if (/already subscribed/i.test(msg)) {
+            msg = 'Ezzel az e-mail címmel már jelentkeztél. Hamarosan keresünk! Ha sürgős, hívj minket.';
+          } else if (!msg) {
+            msg = 'Valami nem sikerült. Kérlek ellenőrizd az adatokat, vagy hívj minket telefonon.';
+          }
+          showError(msg);
+        }
+      });
+    });
+
+    // "Új érdeklődés küldése" – visszaállítás
+    if (againBtn) {
+      againBtn.addEventListener('click', function() {
+        form.reset();
+        thankyou.hidden = true;
+        form.hidden = false;
+        clearError();
+        form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>
